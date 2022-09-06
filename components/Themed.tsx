@@ -1,13 +1,16 @@
+import React from "react";
 import {
   Text as DefaultText,
   TextProps,
   SafeAreaView as DefaultSafeAreaView,
   ScrollView as DefaultScrollView,
-  View as DefaultView,
+  View,
   ViewProps,
   ScrollViewProps,
 } from "react-native";
 import { colors, spacing } from "../theme";
+
+import * as Animatable from "react-native-animatable";
 
 export const Text = (props: TextProps) => {
   return (
@@ -24,18 +27,21 @@ export const SafeAreaView = (props: ViewProps) => {
   );
 };
 
-export const ScrollView = (props: ScrollViewProps) => {
-  return (
-    <DefaultScrollView
-      {...props}
-      style={[{ backgroundColor: colors.background }, props.style]}
-    />
-  );
-};
+export const ScrollView = React.forwardRef(
+  (props: ScrollViewProps, ref: any) => {
+    return (
+      <DefaultScrollView
+        {...props}
+        ref={ref}
+        style={[{ backgroundColor: colors.background }, props.style]}
+      />
+    );
+  }
+);
 
 export const Container = (props: ViewProps) => {
   return (
-    <DefaultView
+    <Animatable.View
       {...props}
       style={[
         {
@@ -45,8 +51,9 @@ export const Container = (props: ViewProps) => {
         },
         props.style,
       ]}
+      animation="fadeInUp"
     >
       {props.children}
-    </DefaultView>
+    </Animatable.View>
   );
 };
