@@ -76,17 +76,10 @@ export default function App() {
   return (
     <SafeAreaView>
       <View style={{ flex: 1 }}>
-        <Text
-          style={{
-            textAlign: "center",
-            opacity: 0.3,
-            fontWeight: "bold",
-            marginVertical: spacing.small,
-          }}
-        >
-          Pillcheck v1.0.0
-        </Text>
+        <Text style={styles.version}>Pillcheck v1.0.0</Text>
+
         {isLoading && <ActivityIndicator color={colors.primary} />}
+
         <ScrollView
           ref={scrollViewRef}
           onContentSizeChange={() => scrollViewRef.current?.scrollToEnd()}
@@ -104,6 +97,7 @@ export default function App() {
               <Text style={styles.emptyText}>You have no logs yet</Text>
             </View>
           )}
+
           {pillLogs.map((log) => (
             <Container key={log.id} style={styles.logContainer}>
               <View style={styles.row}>
@@ -164,7 +158,7 @@ const styles = StyleSheet.create({
     marginBottom: spacing.small,
   },
   emptyText: {
-    opacity: 0.1,
+    opacity: 0.2,
     fontWeight: "bold",
     fontSize: 20,
     marginTop: spacing.small,
@@ -173,6 +167,12 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     marginTop: spacing.large * 6,
-    opacity: 0.1,
+    opacity: 0.2,
+  },
+  version: {
+    textAlign: "center",
+    opacity: 0.3,
+    fontWeight: "bold",
+    marginVertical: spacing.small,
   },
 });
